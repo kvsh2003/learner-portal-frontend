@@ -95,6 +95,19 @@ export default function MyLearningPage() {
                 className="border border-gray-200 rounded p-5 bg-white flex flex-col justify-between hover:border-black transition"
               >
                 <div className="space-y-3">
+                  {course?.thumbnail_url && (
+                    <div className="aspect-video w-full bg-gray-100 rounded overflow-hidden mb-2">
+                      <img
+                        src={course.thumbnail_url}
+                        alt={course?.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                        }}
+                      />
+                    </div>
+                  )}
+
                   <div className="flex justify-between text-xs text-gray-500">
                     <span className="capitalize border border-gray-300 px-2 py-0.5 rounded font-mono">
                       {course?.level || "Course"}

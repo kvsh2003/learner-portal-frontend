@@ -109,9 +109,23 @@ export default function CataloguePage() {
             {courses.map((course) => (
               <div
                 key={course.id}
-                className="border border-gray-200 rounded p-5 bg-white flex flex-col justify-between hover:border-black transition"
+                className="border border-gray-200 rounded p-4 bg-white flex flex-col justify-between hover:border-black transition"
               >
                 <div>
+                  {course.thumbnail_url && (
+                    <div className="aspect-video w-full bg-gray-100 mb-3 overflow-hidden rounded">
+                      <img
+                        src={course.thumbnail_url}
+                        alt={course.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                        }}
+                      />
+                    </div>
+                  )}
+
                   <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
                     <span className="capitalize border border-gray-300 px-2 py-0.5 rounded font-mono">
                       {course.level || "General"}
@@ -121,18 +135,18 @@ export default function CataloguePage() {
                     </span>
                   </div>
 
-                  <h2 className="text-lg font-semibold text-black mt-2">
+                  <h2 className="text-base font-semibold text-black mt-2">
                     <Link href={`/courses/${course.slug}`} className="hover:underline">
                       {course.title}
                     </Link>
                   </h2>
 
-                  <p className="text-gray-600 text-xs mt-2 line-clamp-3">
+                  <p className="text-gray-600 text-xs mt-1.5 line-clamp-3">
                     {course.description}
                   </p>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-gray-100">
+                <div className="mt-4 pt-3 border-t border-gray-100">
                   <Link
                     href={`/courses/${course.slug}`}
                     className="block text-center py-2 bg-black text-white text-xs font-medium rounded hover:bg-gray-800"

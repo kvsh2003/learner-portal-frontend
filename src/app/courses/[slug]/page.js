@@ -134,16 +134,30 @@ export default function CourseDetailPage() {
       </Link>
 
       {/* Header Card */}
-      <div className="border border-gray-200 rounded p-6 bg-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-2">
-          <span className="capitalize border border-gray-300 px-2 py-0.5 rounded text-xs font-mono bg-white">
-            {course.level || "General"}
-          </span>
-          <h1 className="text-2xl font-bold text-black">{course.title}</h1>
-          <p className="text-sm text-gray-600 max-w-xl">{course.description}</p>
+      <div className="border border-gray-200 rounded p-6 bg-gray-50 flex flex-col md:flex-row md:items-start justify-between gap-6">
+        <div className="flex flex-col sm:flex-row gap-5 flex-1">
+          {course.thumbnail_url && (
+            <div className="w-full sm:w-48 aspect-video bg-gray-100 rounded overflow-hidden shrink-0">
+              <img
+                src={course.thumbnail_url}
+                alt={course.title}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.style.display = "none";
+                }}
+              />
+            </div>
+          )}
+          <div className="space-y-2">
+            <span className="capitalize border border-gray-300 px-2 py-0.5 rounded text-xs font-mono bg-white">
+              {course.level || "General"}
+            </span>
+            <h1 className="text-2xl font-bold text-black">{course.title}</h1>
+            <p className="text-sm text-gray-600 max-w-xl">{course.description}</p>
+          </div>
         </div>
 
-        <div className="bg-white border border-gray-200 p-4 rounded min-w-[200px] text-center">
+        <div className="bg-white border border-gray-200 p-4 rounded min-w-[200px] text-center shrink-0">
           {isEnrolled ? (
             <div className="space-y-2">
               <span className="block text-xs font-semibold text-black">
